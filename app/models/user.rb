@@ -6,4 +6,8 @@ class User < ActiveRecord::Base
 
   has_many :carts
   has_one :current_cart, class_name: "Cart"
+
+  def slug
+    self.email.split('@').first
+  end
 end

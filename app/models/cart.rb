@@ -21,4 +21,16 @@ class Cart < ActiveRecord::Base
       line_item = self.line_items.build(:item_id => item_id)
     end
   end
+
+  def checkout
+    self.line_items.each do |line_item|
+      line_item.process
+    end
+    self.update(:status => "Submitted")
+    self.user.carts.build
+  end
+
+  def submitted?
+    self.status == "Submitted"
+  end
 end
