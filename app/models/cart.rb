@@ -3,10 +3,6 @@ class Cart < ActiveRecord::Base
   has_many :items, through: :line_items
   belongs_to :user
 
-  #def total
-  #  self.total = write_attribute(:total, self.items.map(&:price).reduce(:+))
-  #end
-
   def total
     self.items.map(&:price).reduce(:+)
   end
@@ -27,7 +23,6 @@ class Cart < ActiveRecord::Base
       line_item.process
     end
     self.update(:status => "Submitted")
-    self.user.carts.build
   end
 
   def submitted?

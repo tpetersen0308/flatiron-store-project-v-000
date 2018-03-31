@@ -5,6 +5,6 @@ class LineItem < ActiveRecord::Base
   def process
     self.item.inventory -= self.quantity
     self.item.save
-    self.destroy
+    self
   end
 end
